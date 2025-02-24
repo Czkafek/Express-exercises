@@ -3,8 +3,8 @@ const mongoose = require('mongoose');
 const app = express();
 const port = 3000;
 const URI = 'mongodb://localhost:27017/box';
-const Box = require('./models/Box.model.js');
 const boxRoute = require('./routes/box.route.js');
+const userRoute = require('./routes/user.route.js');
 
 
 // MIDDLEWARE
@@ -12,7 +12,8 @@ app.use(express.json());
 
 
 // ROUTES
-app.use('/api', boxRoute)
+app.use('/api/boxes', boxRoute)
+app.use('/api/user', userRoute);
 
 
 mongoose.connect(URI)
