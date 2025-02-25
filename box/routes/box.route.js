@@ -2,6 +2,8 @@ const express = require('express');
 const router = express.Router();
 
 const { getBoxes, getBoxesByHeight, createBox, updateBox, deleteBox } = require('../controllers/box.controller.js');
+const validateCreateBox = require("../validations/box.validation.js");
+const checkValidation = require("../validations/check.validation.js");
 
 
 
@@ -12,7 +14,7 @@ router.get('/', getBoxes);
 router.get('/:height', getBoxesByHeight)
 
 // CREATE A NEW BOX
-router.post('/create', createBox);
+router.post('/create', validateCreateBox, checkValidation, createBox);
 
 // UPDATE A BOX
 router.put('/change/:id', updateBox);
