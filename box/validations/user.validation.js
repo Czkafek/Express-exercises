@@ -12,22 +12,22 @@ const validateCreateUser = [
         .isEmail().withMessage('Must be a valid email address')
         .normalizeEmail(),
 
-        body('password')
-            .trim()
-            .notEmpty().withMessage('Password is required')
-            .isLength({ min: 8 }).withMessage('Password must be at least 8 characters long')
-            .custom(value => {
-                const hasLowerCase = /[a-z]/.test(value);
-                const hasUpperCase = /[A-Z]/.test(value);
-                const hasNumber = /[0-9]/.test(value);
-                const hasSpecialChar = /[!@#$%^&*(),.?":{}|<>]/.test(value);
+    body('password')
+        .trim()
+        .notEmpty().withMessage('Password is required')
+        .isLength({ min: 8 }).withMessage('Password must be at least 8 characters long')
+        .custom(value => {
+            const hasLowerCase = /[a-z]/.test(value);
+            const hasUpperCase = /[A-Z]/.test(value);
+            const hasNumber = /[0-9]/.test(value);
+            const hasSpecialChar = /[!@#$%^&*(),.?":{}|<>]/.test(value);
 
-                if (!hasLowerCase || !hasUpperCase || !hasNumber || !hasSpecialChar) {
-                    throw new Error("Password must contain at least one lowercase letter, one uppercase letter, one number and one special character");
-                }
+            if (!hasLowerCase || !hasUpperCase || !hasNumber || !hasSpecialChar) {
+                throw new Error("Password must contain at least one lowercase letter, one uppercase letter, one number and one special character");
+            }
 
-                return true;
-            }),
+            return true;
+        }),
 ];
 
 module.exports = { validateCreateUser };
