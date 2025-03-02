@@ -1,4 +1,5 @@
 const User = require("../models/User.model.js");
+const { genPassword, verifyPassword } = require("../utils/password.utils.js");
 const bcrypt = require("bcrypt");
 
 const getUsers = async (req, res) => {
@@ -13,9 +14,9 @@ const getUsers = async (req, res) => {
 const createUser = async (req, res) => {
     try {
         const { password, name } = req.body
-        const salt = await bcrypt.genSalt();
-        const newPassword = await bcrypt.hash(password, salt);
-        const user = await User.create({ name: name, password: newPassword });
+        const isFound = await User.findOne({ name: name });
+        if(isFound) return res.status(409).json({ message: "Username already taken" });
+        await User.create({ name: name, password: await genPassword(password) });
         res.status(200).json({ message: "User has been successfully created" });
     } catch (err) {
         res.status(500).json({ message: err })

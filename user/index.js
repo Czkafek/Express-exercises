@@ -4,10 +4,7 @@ const app = express();
 const port = 3000;
 const URI = "mongodb://localhost:27017/user";
 
-const User = require("./models/User.model.js");
 const userRoute = require("./routes/user.route.js");
-const createUserValidation = require("./validation/user.validation.js");
-const checkValidation = require("./validation/check.validation.js");
 
 
 app.use(express.json());
