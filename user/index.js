@@ -1,12 +1,15 @@
 const express = require("express");
 const mongoose = require("mongoose");
+const cookieParser = require("cookie-parser");
 const app = express();
 const port = 3000;
 const URI = "mongodb://localhost:27017/user";
 
 const userRoute = require("./routes/user.route.js");
+const { cookie } = require("express-validator");
 
 
+app.use(cookieParser());
 app.use(express.json());
 
 app.use("/api/users", userRoute);
