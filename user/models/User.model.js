@@ -9,6 +9,10 @@ const UserSchema = mongoose.Schema(
         password: {
             type: String,
             required: [true, "Password field is required"]
+        },
+        refreshToken: {
+            type: String,
+            required: false
         }
     }
 );
